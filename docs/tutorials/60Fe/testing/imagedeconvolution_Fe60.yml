@@ -15,25 +15,28 @@ model_definition:
     parameter:
       value: [1e-4] #the number of these values should be the same as "the number of energy_edges - 1".
       unit: "cm-2 s-1 sr-1"  # do not change it as for now
-deconvolution:
 # if fails use "RLsimple"
+deconvolution:
   algorithm: "RL"
   parameter:
-  # 10 min
-    iteration_max: 2
-    acceleration: True
-    alpha_max: 10.0
-    response_weighting: True
-    response_weighting_index: 0.5
+    iteration_max: 5
+    acceleration:
+        activate: True
+        alpha_max: 10.0
+    response_weighting:
+        activate: True
+        index: 0.5
     smoothing: True
     smoothing_FWHM:
-        value: 2.0
+        value: 0.5
         unit: "deg"
     stopping_criteria:
         statistics: "log-likelihood"
         threshold: 0.01
-    background_normalization_optimization: True
-    background_normalization_optimization_range: {"albedo": [0.01, 10.0]}
-    save_results: False
-    save_results_directory: "./results"
-    save_results_only_final_result: True
+    background_normalization_optimization:
+        activate: True
+        range: {"Fe60 High": [0.01, 10.0]}
+    save_results:
+        activate: False
+        directory: "./results"
+        only_final_result: True
